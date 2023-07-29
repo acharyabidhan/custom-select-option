@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    scrollbar-width: 0;
+}
+
+body {
+    padding: 20px;
+}
+
+#main-options-container {
+    padding: 10px;
+    background-color: rgb(30, 31, 32);
+}
+
+#option-input-field {
+    padding: 10px;
+}
+
+#options-list-container {
+    color: rgb(230, 231, 232);
+    background-color: rgb(30, 31, 32);
+}
+
+#option-list {
+    padding: 10px;
+}
+
+#option-list:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+}
