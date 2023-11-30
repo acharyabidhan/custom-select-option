@@ -17,24 +17,27 @@ function countPreviousSiblings(element) {
     return count;
 }
 
-
 class CustomSelectOption {
-    constructor(parent, options, callback, _sort = false, max_width = "300px", max_height = "300px") {
+    constructor(parent, callback, _sort = false, max_width = "300px", max_height = "300px") {
         this.wrapper_container = document.querySelector(parent);
-        this.all_options_list = _sort ? options.sort() : options;
+        this.sort_values = _sort;
+        this.all_options_list = null;
         this.on_value_change = callback;
         this.selected_value = null;
         this.max_width = max_width;
         this.max_height = max_height;
         this.wrapper_container_zindex = get_zindex(this.wrapper_container);
         this.no_of_prev_elements = countPreviousSiblings(this.wrapper_container);
-        this.create_new_select_option();
-    }
-    get_element_by_id(id) {
-        return document.getElementById(id);
     }
     get_selected_value() {
         return this.selected_value;
+    }
+    set_options(opt) {
+        this.all_options_list = this.sort_values ? opt.sort() : opt;
+    }
+    create_options() {
+        this.wrapper_container.innerHTML = null;
+        this.create_new_select_option();
     }
     create_new_select_option() {
         const main_option_container = document.createElement("div");
@@ -116,22 +119,14 @@ class CustomSelectOption {
     }
 }
 
+// Start---------------------
 
-const brand_list = [
-    "Apple", "Vivo", "Huawei", "Lenovo", "LG", "Xiaomi", "Nokia", "OnePlus", "Oppo", "Samsung"
-];
-
-const country_list = [
-    "Nepal", "India", "Bhutan", "Maldives", "Pakistan", "Bangladesh", "Afghanistan", "China", "Japan"
-];
-
-function callback_f1(value) {
+function my_callback(value) {
     console.log(value);
 }
 
-function callback_f2(value) {
-    console.log(value);
-}
+const options = ["Python", "JavaScript", "Java", "C++", "C", "C#", "Kotlin", "Go", "Rust"];
 
-const select_option1 = new CustomSelectOption(".option1", brand_list, callback_f1, true);
-const select_option2 = new CustomSelectOption(".option2", country_list, callback_f2, false);
+const option = new CustomSelectOption(".option1", my_callback, true);
+option.set_options(options);
+option.create_options();
